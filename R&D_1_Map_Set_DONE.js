@@ -72,21 +72,34 @@ function uniqueValues(values) {
   // console.log(memoizedOperation(obj1)); // 20 (из кэша)
   // console.log(memoizedOperation(obj2)); // Expensive operation, 40
   
-  //4 Реализуйте функцию trackUniqueObjectsWithWeakSet, которая принимает массив объектов и возвращает новый массив, содержащий только уникальные объекты. Используйте WeakSet для отслеживания уже встреченных объектов. Дополнительно, реализуйте функцию removeObject, которая позволяет удалять объекты из WeakSet по ссылке.
-  
+  //4 Реализуйте функцию trackUniqueObjectsWithWeakSet, 
+  //которая принимает массив объектов и возвращает новый 
+  //массив, содержащий только уникальные объекты. 
+  //Используйте WeakSet для отслеживания уже встреченных 
+  // объектов. 
+  //Дополнительно, реализуйте функцию removeObject, 
+  //которая позволяет удалять объекты из WeakSet по ссылке.
+
+  const objects = [{ id: 1 }, { id: 2 }, { id: 1 }];
   const uniqueObjectsSet = new WeakSet()
   
   function trackUniqueObjectsWithWeakSet(objects) {
     let arr = [];
-  
-   objects.forEach((item, index) => {
-     for(let {key, value} of item) {
-       
-     }
+    
+   objects.forEach((el, i) => {
+    let item = JSON.stringify(el);
+    uniqueObjectsSet.add(JSON.parse(item));
+    console.log(uniqueObjectsSet.has(JSON.parse(item)));
    });
-  
-   
-  
+
+  //  objects.forEach((el, i) => {
+
+  //  })
+
+  //  for(let el of map.values()) {
+  //   uniqueObjectsSet.add(el);
+  //   arr.push(el);
+  //  }
     return arr;
   
   }
@@ -96,7 +109,7 @@ function uniqueValues(values) {
   }
   
   // Пример использования
-  const objects = [{ id: 1 }, { id: 2 }, { id: 1 }];
+  
   const uniqueObjects = trackUniqueObjectsWithWeakSet(objects);
   console.log(uniqueObjects); // [{ id: 1 }, { id: 2 }]
   
